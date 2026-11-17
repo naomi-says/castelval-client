@@ -76,7 +76,7 @@ export const P = [
   [['Immobilier professionnel','1 200 000,00 €'],['Crédit hypothécaire','295 565,23 €']],
   [['Profil investisseur','Non renseigné']]]}]
 
-export const NAV = [['home','Accueil'],['patrimoine','Mon patrimoine'],['comptes','Mes comptes'],['cartes','Mes cartes'],['virements','Virements'],['assurances','Mes assurances'],['credits','Mes crédits'],['documents','Mes relevés de compte']]
+export const NAV = [['home','Accueil'],['patrimoine','Mon patrimoine'],['comptes','Mes comptes'],['cartes','Mes cartes'],['virements','Virements'],['assurances','Mes assurances'],['credits','Mes crédits'],['documents','Documents']]
 
 /* Sub-sections of the client demo's navigation: [label, tab or route, caption] */
 export const SUBS = {
@@ -95,6 +95,12 @@ export const SUBS = {
     ['Mes bénéficiaires', 1],
     ['Plafonds de virement', 2],
     ['Virements programmés et prélèvements', 3]
+  ],
+  documents: [
+    ['Mes relevés de compte', 0],
+    ['Mes autres documents à disposition', 1],
+    ['Mes documents à transmettre', 2],
+    ['Mes devis et contrats à signer', 3]
   ]
 }
 
@@ -161,4 +167,4 @@ export const LOGOUT_IC = `<path d='M9 4H5v16h4M16 8l4 4-4 4M20 12H9'/>`
 export const EYE = `<path d='M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z'/><circle cx='12' cy='12' r='3'/>`
 export const EYX = EYE + `<path d='M4 4l16 16'/>`
 
-export const TIP={'Accueil':'Home','Mon patrimoine':'My wealth','Mes comptes':'My accounts','Mes cartes':'My cards','Virements':'Transfers','Mes assurances':'My insurance','Mes crédits':'My loans','Mes documents':'My documents','Messages':'Messages','Téléphone':'Phone','Rendez-vous':'Appointments','Mon profil':'My profile','Changer de profil':'Switch profile','Paramètres':'Settings','Déconnexion':'Sign out','Mes opérations':'My transactions','Mes réglages de compte':'Manage my account','Mes dépenses carte':'My card spending','Mes points et cashback':'My points and cashback','Mes réglages de carte':'Manage my card','Mes blocages de carte':'My card blocks','Nouveau virement':'New transfer','Mes bénéficiaires':'My beneficiaries','Plafonds de virement':'Transfer limits','Virements programmés et prélèvements':'Scheduled transfers and direct debits','Mes avoirs':'My financial assets','Patrimoine net total':'Total net wealth','Mes relevés de compte':'My account statements','Mes autres documents à disposition':'My other available documents','Mes documents à transmettre':'Documents I need to submit','Mes devis et contrats à signer':'My quotes and contracts to sign','Ma sécurité':'My security','Mes paramètres de contact':'My contact preferences','Alertes et évènements':'Alerts and events','Patrimoine financier à agréger':'Financial assets to aggregate','Mes coordonnées':'My contact details','Mon identité':'My identity','Ma situation familiale':'My family situation','Mon profil investisseur':'My investor profile'}
+export const TIP={'Accueil':'Home','Mon patrimoine':'My wealth','Mes comptes':'My accounts','Mes cartes':'My cards','Virements':'Transfers','Mes assurances':'My insurance','Mes crédits':'My loans','Mes documents':'My documents','Documents':'Documents','Messages':'Messages','Téléphone':'Phone','Rendez-vous':'Appointments','Mon profil':'My profile','Changer de profil':'Switch profile','Paramètres':'Settings','Déconnexion':'Sign out','Mes opérations':'My transactions','Mes réglages de compte':'Manage my account','Mes dépenses carte':'My card spending','Mes points et cashback':'My points and cashback','Mes réglages de carte':'Manage my card','Mes blocages de carte':'My card blocks','Nouveau virement':'New transfer','Mes bénéficiaires':'My beneficiaries','Plafonds de virement':'Transfer limits','Virements programmés et prélèvements':'Scheduled transfers and direct debits','Mes avoirs':'My financial assets','Patrimoine net total':'Total net wealth','Mes relevés de compte':'My account statements','Mes autres documents à disposition':'My other available documents','Mes documents à transmettre':'Documents I need to submit','Mes devis et contrats à signer':'My quotes and contracts to sign','Ma sécurité':'My security','Mes paramètres de contact':'My contact preferences','Alertes et évènements':'Alerts and events','Patrimoine financier à agréger':'Financial assets to aggregate','Mes coordonnées':'My contact details','Mon identité':'My identity','Ma situation familiale':'My family situation','Mon profil investisseur':'My investor profile'}

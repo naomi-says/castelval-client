@@ -1531,7 +1531,7 @@ export default function Portal({ onLogout }) {
                     <button
                       className={S.r === k || open ? 'on' : ''}
                       aria-expanded={subs ? String(open) : undefined}
-                      onClick={() => (subs ? (k === 'documents' ? A.navOnly(k) : A.nav(k)) : A.go(k))}
+                      onClick={() => (subs ? A.nav(k) : A.go(k))}
                     >
                       <Ic d={IC[k]} />
                       <span>{label}</span>

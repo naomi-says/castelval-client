@@ -1119,11 +1119,61 @@ function credits(x) {
 }
 
 function documents(x) {
-  const { p, A } = x
+  const { S, p, A } = x
+  const titles = [
+    'Mes relevés de compte',
+    'Mes autres documents à disposition',
+    'Mes documents à transmettre',
+    'Mes devis et contrats à signer'
+  ]
+  const section = titles[S.t] || titles[0]
+
+  if (S.t === 1) {
+    return (
+      <>
+        {ptitle(section)}
+        <div className="card">
+          <div className="row">
+            <span>
+              Relevé d’identité bancaire
+              <small>Compte de paiement · {p.n}</small>
+            </span>
+            <span>
+              <button className="lnk" onClick={A.rib}>
+                Consulter
+              </button>
+            </span>
+          </div>
+        </div>
+      </>
+    )
+  }
+
+  if (S.t === 2 || S.t === 3) {
+    const sign = S.t === 3
+    return (
+      <>
+        {ptitle(section)}
+        <div className="card">
+          <div className="dlg-empty">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d={sign ? 'M7 3h7l5 5v13H7zM14 3v5h5' : 'M3 7h6l2 2h10v11H3z'} />
+            </svg>
+            <b>{sign ? 'Aucune signature en attente' : 'Votre dossier est à jour'}</b>
+            <p>
+              {sign
+                ? 'Vous retrouverez ici les documents nécessitant votre signature.'
+                : 'Aucun document n’est demandé dans ce profil de démonstration.'}
+            </p>
+          </div>
+        </div>
+      </>
+    )
+  }
 
   return (
     <>
-      {ptitle('Mes relevés de compte')}
+      {ptitle(section)}
       <div className="card">
         {p.doc.map((m, i) => (
           <div className="row" key={i}>
