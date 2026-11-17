@@ -751,14 +751,3 @@ select{width:100%;padding:12px;border:1px solid var(--line);border-radius:8px;ba
   .cv-table-viewport{max-height:none;overflow:visible}
   .cv-scroll-edge{display:none}
 }
-
-/* header icons */
-.chd{display:flex;align-items:flex-start;gap:16px}
-.chd h3{flex:1;margin-bottom:0!important}
-.card>.chd{margin-bottom:12px}
-.chi{width:34px;height:34px;margin-top:2px;color:var(--navy);stroke-width:1.6}
-h3.ul::after{content:'';display:block;width:100px;height:4px;background:var(--gold);margin-top:12px}
-.ah .hm{display:inline-flex;align-items:center;gap:8px}
-.ah .hm .ic{width:22px;height:22px}
-#sb .ms{align-items:center;gap:10px}
-@media(max-width:860px){#sb .ms{display:flex}}

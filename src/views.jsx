@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import { P, LIM, R, D, N, LOGO } from './data'
-import { Ic, ICN, hd, kv, tb, bar, swRow, OpsTable, upl, Sel } from './ui'
+import { hd, kv, tb, bar, swRow, OpsTable, upl, Sel } from './ui'
 import tr from './i18n'
 
 /* Wealth computation — same as W() in the original script.
@@ -31,10 +31,7 @@ function home(x) {
       <p className="greet-sub">Heureux de vous retrouver.</p>
       <div className="grid" style={{ marginTop: 18 }}>
         <div className="card c6">
-          <div className="chd">
-            <Ic d={ICN.wallet} cls="ic chi" />
-            <h3 className="ul">Mes comptes et épargne de précaution</h3>
-          </div>
+          <h3>Mes comptes et épargne de précaution</h3>
           {p.acc.map((a, i) => (
             <div className="row" key={i}>
               <span>{a[0]}</span>
@@ -46,8 +43,7 @@ function home(x) {
         </div>
 
         <div className="card c6">
-          <div className="row chd">
-            <Ic d={ICN.bank} cls="ic chi" />
+          <div className="row">
             <h3>Mon patrimoine</h3>
             <button className="lnk" onClick={() => A.go('patrimoine')} aria-label="Voir le détail du patrimoine">
               ›
@@ -68,9 +64,8 @@ function home(x) {
         </div>
 
         <div className="card c6">
-          <div className="row chd">
-            <Ic d={ICN.cashback} cls="ic chi" />
-            <h3 className="ul">Mon cashback et mes Points Castelval</h3>
+          <div className="row">
+            <h3>Mon cashback et mes Points Castelval</h3>
             <button className="lnk" onClick={() => A.go('cartes', 1)} aria-label="Voir mes points et mon cashback">
               ›
             </button>
@@ -82,9 +77,8 @@ function home(x) {
         </div>
 
         <div className="card c6">
-          <div className="row chd">
-            <Ic d={ICN.plus} cls="ic chi" />
-            <h3 className="ul">Souscrire</h3>
+          <div className="row">
+            <h3>Souscrire</h3>
             <button className="lnk" onClick={() => A.go('souscription')} aria-label="Souscrire">
               ›
             </button>

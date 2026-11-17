@@ -5,16 +5,6 @@ export const Ic = ({ d, cls = 'ic' }) => (
   <svg className={cls} viewBox="0 0 24 24" dangerouslySetInnerHTML={{ __html: d }} />
 )
 
-export const ICN = {
-  wallet: '<path d="M4 8.5V7a2 2 0 0 1 2-2h10l2 2"/><rect x="3" y="8" width="18" height="12" rx="3"/><rect x="15" y="12" width="6" height="4" rx="1.5"/><circle cx="17.5" cy="14" r=".6"/>',
-  bank: '<path d="M3 9l9-5 9 5"/><path d="M3 9h18"/><path d="M6 12v6M10 12v6M14 12v6M18 12v6"/><path d="M3 21h18"/>',
-  cashback: '<path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1"/><path d="M3 4v4.5h4.5"/><path d="M14.5 9.2a3 3 0 1 0 0 5.6M8.5 11h5M8.5 13h5"/>',
-  plus: '<circle cx="12" cy="12" r="9.5"/><path d="M12 7v10M7 12h10"/>',
-  mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
-  phone: '<path d="M5 3.5h3.5l1.5 4-2 1.5a11 11 0 0 0 5.5 5.5l1.5-2 4 1.5V17a2.5 2.5 0 0 1-2.5 2.5C10.5 19.5 4.5 13.5 4.5 6A2.5 2.5 0 0 1 5 3.5z"/>',
-  cal: '<rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/>'
-}
-
 export function hd(x, title, limit) {
   const all = TABS[x.S.r]
   const tabs = all && limit ? all.slice(0, limit) : all

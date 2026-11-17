@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { P, NAV, SUBS, IC, TIP, EYE, EYX, COLLAPSE_IC, LOGOUT_IC, LOGO, R, D, N, MAIL, MAIL_OBJ, RDV_OBJ, setLang } from './data'
 import tr from './i18n'
-import { Ic, ICN, kv, tb, Sel } from './ui'
+import { Ic, kv, tb, Sel } from './ui'
 import View from './views'
 
 /* Same initial state as init() in the original script */
@@ -1466,13 +1466,13 @@ export default function Portal({ onLogout }) {
             <span>CASTELVAL</span>
           </div>
           <button className="hm" onClick={() => A.modal('msg')}>
-            <Ic d={ICN.mail} /> Messages <i>1</i>
+            Messages <i>1</i>
           </button>
           <button className="hm" onClick={() => A.modal('tel')}>
-            <Ic d={ICN.phone} /> Téléphone
+            Téléphone
           </button>
           <button className="hm" onClick={() => A.modal('rdv')}>
-            <Ic d={ICN.cal} /> Rendez-vous
+            Rendez-vous
           </button>
           <button
             id="eye"
@@ -1569,12 +1569,12 @@ export default function Portal({ onLogout }) {
                 )
               })}
               {[
-                ['msg', 'Messages', ICN.mail],
-                ['tel', 'Téléphone', ICN.phone],
-                ['rdv', 'Rendez-vous', ICN.cal]
-              ].map(([k, label, ico]) => (
+                ['msg', 'Messages'],
+                ['tel', 'Téléphone'],
+                ['rdv', 'Rendez-vous']
+              ].map(([k, label]) => (
                 <button key={k} className="ms" onClick={() => A.modal(k)}>
-                  <Ic d={ico} /> {label}
+                  {label}
                 </button>
               ))}
             </div>
