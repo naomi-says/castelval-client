@@ -705,6 +705,15 @@ select{width:100%;padding:12px;border:1px solid var(--line);border-radius:8px;ba
 .cv-transaction-table--adv th:nth-child(3){width:20%}
 .cv-transaction-table--adv th:nth-child(4){width:20%}
 .cv-transaction-table--adv th:nth-child(4),.cv-transaction-table--adv td:nth-child(4){text-align:left}
+.cv-transaction-table--sched th:nth-child(1){width:17%}
+.cv-transaction-table--sched th:nth-child(2){width:29%}
+.cv-transaction-table--sched th:nth-child(3){width:22%}
+.cv-transaction-table--sched th:nth-child(4){width:16%}
+.cv-transaction-table--sched th:nth-child(5){width:16%}
+.cv-transaction-table--sched th:nth-child(3),.cv-transaction-table--sched td:nth-child(3){text-align:left}
+.cv-transaction-table--sched th:nth-child(4),.cv-transaction-table--sched td:nth-child(4){text-align:right}
+.cv-transaction-table--sched th:nth-child(4) .cv-sort{justify-content:flex-end}
+.cv-transaction-table--sched th:nth-child(5),.cv-transaction-table--sched td:nth-child(5){text-align:left}
 .cv-row-link{cursor:pointer}
 
 .cv-sort{display:inline-flex;align-items:center;justify-content:flex-start;gap:7px;min-height:28px;width:100%;padding:0;border:0;background:transparent;color:#00244D;font:inherit;font-size:calc(12px + 1pt);line-height:1.4;white-space:nowrap;text-align:left;cursor:pointer}
@@ -749,6 +758,12 @@ select{width:100%;padding:12px;border:1px solid var(--line);border-radius:8px;ba
   .cv-transaction-table thead th,.cv-transaction-table tbody td{padding-left:7px;padding-right:7px}
   .cv-transaction-table td:first-child{white-space:normal}
   .cv-transaction-table .cv-money{white-space:normal;overflow-wrap:normal}
+  .cv-transaction-table--sched{min-width:560px}
+  .cv-transaction-table--sched th:nth-child(1){width:15%}
+  .cv-transaction-table--sched th:nth-child(2){width:28%}
+  .cv-transaction-table--sched th:nth-child(3){width:23%}
+  .cv-transaction-table--sched th:nth-child(4){width:16%}
+  .cv-transaction-table--sched th:nth-child(5){width:18%}
 }
 @media (max-width:530px){
   .ledger-balance{width:100%;justify-content:space-between}

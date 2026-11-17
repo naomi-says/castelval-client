@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import { P, LIM, R, D, N, LOGO } from './data'
-import { hd, kv, tb, bar, swRow, OpsTable, upl, Sel } from './ui'
+import { hd, kv, tb, bar, swRow, OpsTable, Sel } from './ui'
 import tr from './i18n'
 
 /* Wealth computation — same as W() in the original script.
@@ -556,8 +556,8 @@ function comptes(x) {
           </div>
         </div>
         <div className="card c12">
-          <h3>Mes opérations à venir</h3>
-          {upl(p, E)}
+          <h3 className="ledger-title">Mes opérations à venir</h3>
+          <OpsTable rows={p.up} sort={S.sort} onSort={A.sort} E={E} variant="scheduled" />
         </div>
       </div>
     </>
@@ -1038,10 +1038,17 @@ function virements(x) {
     <>
       {h}
       <div className="card">
-        {upl(p, E)}
+        <div className="ledger-head">
+          <h3 className="ledger-title">Virements programmés et prélèvements</h3>
+        </div>
+        <OpsTable rows={p.up} sort={S.sort} onSort={A.sort} E={E} variant="scheduled" />
         <div className="acts">
           <button onClick={() => A.open('upm')}>Gérer un élément</button>
         </div>
+        <p className="ledger-note">
+          Données de démonstration. Les opérations à venir sont prévisionnelles et ne sont pas incluses dans le solde
+          disponible.
+        </p>
       </div>
     </>
   )

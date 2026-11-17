@@ -68,9 +68,9 @@ export const swRow = (label, checked, onChange) => (
 
 /* Operation list — Castelval "Mes opérations" design:
    sticky header, gold sort marks, a 338 px scrolling viewport and edge jumps. */
-export function OpsTable({ rows, sort, onSort, E, onRow, adv = false }) {
+export function OpsTable({ rows, sort, onSort, E, onRow, adv = false, variant }) {
   const [c, d] = sort
-  const r = [...rows].sort((x, y) => (x[c] > y[c] ? 1 : x[c] < y[c] ? -1 : 0) * d)
+  const scheduled = variant === 'scheduled'
   const view = useRef(null)
   const [edge, setEdge] = useState({ top: false, bottom: false })
 
@@ -108,7 +108,28 @@ export function OpsTable({ rows, sort, onSort, E, onRow, adv = false }) {
   }, [rows, c, d])
 
   const jump = delta => view.current && view.current.scrollBy({ top: delta, behavior: 'smooth' })
-  const head = adv ? ['Date opération', 'Libellé', 'Montant', 'Statut'] : ['Date opération', 'Libellé', 'Montant']
+  /* Scheduled transfers add a Type column before the amount and the row status.
+     Amount keeps the shared sort id 2 so switching pages never leaves a stale column. */
+  const cols = scheduled
+    ? [
+        { label: 'Date opération', short: 'Date', sort: 0, value: r => r[0], cell: r => D(r[0]) },
+        { label: 'Libellé', sort: 1, value: r => r[1], cell: r => r[1] },
+        { label: 'Type', cell: r => r[2] },
+        { label: 'Montant', sort: 2, value: r => r[3], money: true, cell: r => E(r[3]) },
+        { label: 'Statut', cell: r => <span className="tag">{r[4]}</span> }
+      ]
+    : [
+        { label: 'Date opération', short: 'Date', sort: 0, value: r => r[0], cell: r => D(r[0]) },
+        { label: 'Libellé', sort: 1, value: r => r[1], cell: r => r[1] },
+        { label: 'Montant', sort: 2, value: r => r[2], money: true, cell: r => E(r[2]) },
+        ...(adv ? [{ label: 'Statut', cell: () => <span className="tag">Comptabilisée</span> }] : [])
+      ]
+  const sorter = cols.find(col => col.sort === c)
+  const r = [...rows].sort((x, y) => {
+    const a = sorter ? sorter.value(x) : x[c]
+    const b = sorter ? sorter.value(y) : y[c]
+    return (a > b ? 1 : a < b ? -1 : 0) * d
+  })
   const sortName = i => (i === 0 ? "date d'opération" : i === 1 ? 'libellé' : 'montant')
 
   return (
@@ -125,21 +146,29 @@ export function OpsTable({ rows, sort, onSort, E, onRow, adv = false }) {
         ref={view}
         tabIndex={0}
         role="region"
-        aria-label="Historique défilant des opérations"
+        aria-label={scheduled ? 'Liste défilante des opérations à venir' : 'Historique défilant des opérations'}
       >
-        <table className={'cv-transaction-table' + (adv ? ' cv-transaction-table--adv' : '')}>
-          <caption className="cv-sr-only">Historique des opérations du compte</caption>
+        <table
+          className={
+            'cv-transaction-table' +
+            (adv ? ' cv-transaction-table--adv' : '') +
+            (scheduled ? ' cv-transaction-table--sched' : '')
+          }
+        >
+          <caption className="cv-sr-only">
+            {scheduled ? 'Virements et prélèvements à venir' : 'Historique des opérations du compte'}
+          </caption>
           <thead>
             <tr>
-              {head.map((name, i) => {
-                if (i > 2) {
+              {cols.map((col, i) => {
+                if (col.sort === undefined) {
                   return (
                     <th key={i} scope="col" className="cv-th">
-                      {name}
+                      {col.label}
                     </th>
                   )
                 }
-                const active = c === i
+                const active = c === col.sort
                 return (
                   <th
                     key={i}
@@ -150,17 +179,17 @@ export function OpsTable({ rows, sort, onSort, E, onRow, adv = false }) {
                     <button
                       type="button"
                       className="cv-sort"
-                      onClick={() => onSort(i)}
-                      aria-label={`Trier par ${sortName(i)}, ordre ${active && d > 0 ? 'décroissant' : 'croissant'}`}
+                      onClick={() => onSort(col.sort)}
+                      aria-label={`Trier par ${sortName(col.sort)}, ordre ${active && d > 0 ? 'décroissant' : 'croissant'}`}
                     >
                       <span className={'cv-sort-label' + (active ? ' is-active' : '')} aria-current={active ? 'true' : undefined}>
-                        {i === 0 ? (
+                        {col.short ? (
                           <>
-                            <span className="cv-sort-label-wide">Date opération</span>
-                            <span className="cv-sort-label-narrow">Date</span>
+                            <span className="cv-sort-label-wide">{col.label}</span>
+                            <span className="cv-sort-label-narrow">{col.short}</span>
                           </>
                         ) : (
-                          name
+                          col.label
                         )}
                       </span>
                       <span className="cv-sort-slot" aria-hidden="true">
@@ -179,7 +208,7 @@ export function OpsTable({ rows, sort, onSort, E, onRow, adv = false }) {
           <tbody>
             {r.length === 0 && (
               <tr>
-                <td className="cv-td" colSpan={head.length}>
+                <td className="cv-td" colSpan={cols.length}>
                   Aucune donnée.
                 </td>
               </tr>
@@ -190,14 +219,11 @@ export function OpsTable({ rows, sort, onSort, E, onRow, adv = false }) {
                 className={onRow ? 'cv-row-link' : undefined}
                 onClick={onRow ? () => onRow(row) : undefined}
               >
-                <td className="cv-td">{D(row[0])}</td>
-                <td className="cv-td">{row[1]}</td>
-                <td className="cv-td cv-money">{E(row[2])}</td>
-                {adv && (
-                  <td className="cv-td">
-                    <span className="tag">Comptabilisée</span>
+                {cols.map((col, j) => (
+                  <td key={j} className={'cv-td' + (col.money ? ' cv-money' : '')}>
+                    {col.cell(row)}
                   </td>
-                )}
+                ))}
               </tr>
             ))}
           </tbody>
@@ -213,12 +239,6 @@ export function OpsTable({ rows, sort, onSort, E, onRow, adv = false }) {
     </div>
   )
 }
-
-export const upl = (p, E) =>
-  tb(
-    ['Date', 'Libellé', 'Type', 'Montant', 'Statut'],
-    p.up.map(u => [D(u[0]), u[1], u[2], E(u[3]), <span className="tag">{u[4]}</span>])
-  )
 
 /* Custom dropdown: a native <select> popup cannot be styled, so the options are
    rendered in the app's own menu (rounded white panel, pill highlight). */
