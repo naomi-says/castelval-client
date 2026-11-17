@@ -1,0 +1,77 @@
+{
+  "expo": {
+    "name": "Castelval",
+    "slug": "castelval-espace-client",
+    "scheme": "castelval",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "fr.castelval.espaceclient",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "fr.castelval.espaceclient",
+      "adaptiveIcon": {
+        "backgroundColor": "#0f2a4d",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.USE_BIOMETRIC",
+        "android.permission.USE_FINGERPRINT",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.USE_BIOMETRIC",
+        "android.permission.USE_FINGERPRINT",
+        "android.permission.RECORD_AUDIO"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-secure-store",
+      "expo-sharing",
+      "expo-font",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "backgroundColor": "#0f2a4d",
+          "imageWidth": 220
+        }
+      ],
+      [
+        "expo-local-authentication",
+        {
+          "faceIDPermission": "Castelval utilise Face ID pour valider vos opérations sur cet appareil de confiance."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Castelval accède à vos photos pour choisir votre photo de profil."
+        }
+      ],
+      "expo-document-picker"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "d8af4caf-28ed-4d22-a901-b4c00eb0ab86"
+      }
+    },
+    "owner": "nishashree",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/d8af4caf-28ed-4d22-a901-b4c00eb0ab86"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+node_modules/
+.expo/
+dist/
+web-build/
+*.log
+.DS_Store
+missing.txt
+tests/e2e/shots/
+dist-web/
