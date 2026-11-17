@@ -130,10 +130,11 @@ main{padding:20px 16px}.c8,.c4,.c6{grid-column:span 12}.big{font-size:44px}.tog{
 .tabs button:hover{background:transparent;color:#315982}
 .tabs button.on{background:transparent;color:#00244D;font-weight:700}
 .tabs button.on::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--gold)}
-.st{display:flex;width:100%;margin-bottom:18px;border:1px solid #C5D9EE;border-radius:6px;overflow:hidden;background:#fff}
-.st span{flex:1 1 0;min-width:0;min-height:46px;display:flex;align-items:center;justify-content:center;padding:11px 14px;border-right:1px solid #C5D9EE;background:#fff;color:#00244D;font-size:calc(14px + 1pt);line-height:1.4;text-align:center}
-.st span:last-child{border-right:0}
-.st span.on{background:#00244D;color:#fff;font-weight:700}
+.st{display:flex;width:100%;margin-bottom:14px;border:1px solid #C5D9EE;border-radius:6px;overflow-x:auto;background:#fff;scrollbar-width:thin}
+.st button{flex:1 0 auto;min-height:40px;display:flex;align-items:center;justify-content:center;padding:8px 14px;border:0;border-right:1px solid #C5D9EE;border-radius:0;background:#fff;color:#00244D;font-size:13px;line-height:1.35;font-weight:400;white-space:nowrap;text-align:center;cursor:pointer}
+.st button:last-child{border-right:0}
+.st button:hover:not(.on){background:#EEF4FA}
+.st button.on{background:#00244D;color:#fff;font-weight:700}
 .tag{display:inline-block;background:#eef2f7;color:#0f2a4d;border-radius:999px;padding:2px 10px;font-size:12px}
 label.sw{display:flex;align-items:center;gap:8px;margin:0;font-weight:500}.sw input{width:auto}
 .lnk{background:none;border:0;color:#0f2a4d;text-decoration:underline;padding:0}th.s{cursor:pointer}
@@ -639,7 +640,7 @@ select{width:100%;padding:12px;border:1px solid var(--line);border-radius:8px;ba
   .kpi span{font-size:12px}
   .tabs{gap:14px}
   .tabs button{font-size:13px;padding:12px 2px}
-  .st span{font-size:13px;padding:10px 6px}
+  .st button{font-size:12px;padding:7px 10px;min-height:36px}
   .card-panel,.cb-panel,.agg-panel,.pcard{padding-left:14px;padding-right:14px}
   .cr-row,.cr-group-h,.stm-item{padding-left:14px;padding-right:14px}
   .cr-row-r{gap:8px}

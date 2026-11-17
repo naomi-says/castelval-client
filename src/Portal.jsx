@@ -376,6 +376,24 @@ export default function Portal({ onLogout }) {
     back() {
       up({ step: S.step - 1 })
     },
+    stepTo(i) {
+      if (i < 0 || i > 4 || i === S.step) return
+      const f = { ...S.tf }
+      /* keep what was typed on the amount step when jumping ahead */
+      if (S.step === 2) {
+        if (refs.tf2.current) {
+          const m = parseFloat(refs.tf2.current.value.replace(',', '.'))
+          if (m > 0) f.m = m
+        }
+        if (refs.tf3.current && refs.tf3.current.value) f.dt = refs.tf3.current.value
+        if (refs.tf4.current) f.mo = refs.tf4.current.value
+      }
+      const d = f.d !== undefined ? +f.d : 0
+      const c = f.c || 'a' + (d === 0 ? 1 : 0)
+      const tf = { ...f, d, c, dt: f.dt || '2026-10-15' }
+      if (i >= 3 && tf.m === undefined) tf.m = 500
+      up({ step: i, tf, err: '' })
+    },
     next() {
       const f = S.tf
       if (S.step === 0) {

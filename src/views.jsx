@@ -850,9 +850,15 @@ function virements(x) {
         {h}
         <div className="st">
           {st.map((s, i) => (
-            <span key={i} className={i === S.step ? 'on' : ''}>
+            <button
+              type="button"
+              key={i}
+              className={i === S.step ? 'on' : ''}
+              aria-current={i === S.step ? 'step' : undefined}
+              onClick={() => A.stepTo(i)}
+            >
               {i + 1}. {s}
-            </span>
+            </button>
           ))}
         </div>
         <div className="card">
