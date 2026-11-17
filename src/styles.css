@@ -130,7 +130,10 @@ main{padding:20px 16px}.c8,.c4,.c6{grid-column:span 12}.big{font-size:44px}.tog{
 .tabs button:hover{background:transparent;color:#315982}
 .tabs button.on{background:transparent;color:#00244D;font-weight:700}
 .tabs button.on::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--gold)}
-.st{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}.st span{padding:4px 12px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:13px}.st span.on{background:#0f2a4d;border-color:#0f2a4d;color:#fff}
+.st{display:flex;width:100%;margin-bottom:18px;border:1px solid #C5D9EE;border-radius:6px;overflow:hidden;background:#fff}
+.st span{flex:1 1 0;min-width:0;min-height:46px;display:flex;align-items:center;justify-content:center;padding:11px 14px;border-right:1px solid #C5D9EE;background:#fff;color:#00244D;font-size:calc(14px + 1pt);line-height:1.4;text-align:center}
+.st span:last-child{border-right:0}
+.st span.on{background:#00244D;color:#fff;font-weight:700}
 .tag{display:inline-block;background:#eef2f7;color:#0f2a4d;border-radius:999px;padding:2px 10px;font-size:12px}
 label.sw{display:flex;align-items:center;gap:8px;margin:0;font-weight:500}.sw input{width:auto}
 .lnk{background:none;border:0;color:#0f2a4d;text-decoration:underline;padding:0}th.s{cursor:pointer}
@@ -151,11 +154,14 @@ select{width:100%;padding:12px;border:1px solid var(--line);border-radius:8px;ba
 .greet-sub{color:var(--mute);margin:12px 0 0;font-size:14px}
 
 /* nav sub-sections */
-#sn .sub{background:#eaf1fb;border-bottom:1px solid var(--line);border-radius:0 0 6px 6px;padding:6px;display:flex;flex-direction:column;gap:4px;margin:-2px 0 2px}
-#sn .sub button{background:#fff;border:1px solid #dbe4f3;border-radius:6px;padding:11px 14px;font-weight:500;font-size:14px;color:var(--navy);justify-content:flex-start;gap:0}
-#sn .sub button:hover{background:#f7fafe}
-#sn .sub button small{display:block;font-size:12px;color:var(--mute);font-weight:400;margin-top:2px}
-#sn .sub button.subon{color:var(--accent);border-color:#b9cdec;font-weight:600}
+#sn .sub{display:flex;flex-direction:column;margin:0 0 10px;background:#fff;border:1px solid #C5D9EE;border-radius:6px;overflow:hidden}
+#sn .sub button{min-height:46px;background:#fff;border:0;border-bottom:1px solid #C5D9EE;border-radius:0;padding:11px 14px;font-weight:400;font-size:calc(14px + 1pt);line-height:1.4;color:#00244D;justify-content:flex-start;gap:0;text-align:left}
+#sn .sub button:last-child{border-bottom:0}
+#sn .sub button:hover{background:#EEF4FA}
+#sn .sub button small{display:block;font-size:12px;color:#536477;font-weight:400;margin-top:2px}
+#sn .sub button.subon{background:#00244D;color:#fff;font-weight:700}
+#sn .sub button.subon:hover{background:#00244D}
+#sn .sub button.subon small{color:rgba(255,255,255,.78)}
 #sn .chev{transition:transform .2s}
 #sn .chev.up{transform:rotate(180deg)}
 #sn button.demo{font-size:13px;font-weight:500;color:var(--mute);border-bottom:0;margin-top:16px;padding:10px 18px}
@@ -633,7 +639,7 @@ select{width:100%;padding:12px;border:1px solid var(--line);border-radius:8px;ba
   .kpi span{font-size:12px}
   .tabs{gap:14px}
   .tabs button{font-size:13px;padding:12px 2px}
-  .st span{font-size:12px}
+  .st span{font-size:13px;padding:10px 6px}
   .card-panel,.cb-panel,.agg-panel,.pcard{padding-left:14px;padding-right:14px}
   .cr-row,.cr-group-h,.stm-item{padding-left:14px;padding-right:14px}
   .cr-row-r{gap:8px}

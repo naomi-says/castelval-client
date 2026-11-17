@@ -1547,6 +1547,7 @@ export default function Portal({ onLogout }) {
                           <button
                             key={sl}
                             className={S.r === k && S.t === st ? 'subon' : ''}
+                            aria-current={S.r === k && S.t === st ? 'page' : undefined}
                             onClick={() =>
                               typeof st === 'number'
                                 ? A.go(k, st)
