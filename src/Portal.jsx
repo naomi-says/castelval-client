@@ -1563,27 +1563,36 @@ export default function Portal({ onLogout }) {
                     </button>
                     {open && (
                       <div className="sub">
-                        {subs.map(([sl, st, hint]) => (
-                          <button
-                            key={sl}
-                            className={S.r === k && S.t === st ? 'subon' : ''}
-                            aria-current={S.r === k && S.t === st ? 'page' : undefined}
-                            onClick={() =>
-                              typeof st === 'number'
-                                ? A.go(k, st)
-                                : st === 'structures'
-                                ? A.modal('profile')
-                                : st.indexOf('d-') === 0
-                                ? A.doc(st)
-                                : A.go(st)
-                            }
-                          >
-                            <span>
-                              {sl}
-                              {hint && <small>{hint}</small>}
-                            </span>
-                          </button>
-                        ))}
+                        {subs.map(([sl, st, hint]) => {
+                          /* "Mes autres comptes" opens the space dialog: that row is the
+                             current one while the dialog is up, instead of its tab */
+                          const spaces = !!dialog && dialog.kind === 'profile'
+                          const on =
+                            typeof st === 'number'
+                              ? S.r === k && S.t === st && !spaces
+                              : st === 'structures' && spaces
+                          return (
+                            <button
+                              key={sl}
+                              className={on ? 'subon' : ''}
+                              aria-current={on ? 'page' : undefined}
+                              onClick={() =>
+                                typeof st === 'number'
+                                  ? A.go(k, st)
+                                  : st === 'structures'
+                                  ? A.modal('profile')
+                                  : st.indexOf('d-') === 0
+                                  ? A.doc(st)
+                                  : A.go(st)
+                              }
+                            >
+                              <span>
+                                {sl}
+                                {hint && <small>{hint}</small>}
+                              </span>
+                            </button>
+                          )
+                        })}
                       </div>
                     )}
                   </Fragment>
