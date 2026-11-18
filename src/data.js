@@ -98,9 +98,8 @@ export const SUBS = {
   ],
   documents: [
     ['Mes relevés de compte', 0],
-    ['Mes autres documents à disposition', 1],
-    ['Mes documents', 2],
-    ['Mes contrats', 3]
+    ['Mes documents', 1],
+    ['Mes contrats', 2]
   ]
 }
 
@@ -167,4 +166,4 @@ export const LOGOUT_IC = `<path d='M9 4H5v16h4M16 8l4 4-4 4M20 12H9'/>`
 export const EYE = `<path d='M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z'/><circle cx='12' cy='12' r='3'/>`
 export const EYX = EYE + `<path d='M4 4l16 16'/>`
 
-export const TIP={'Accueil':'Home','Mon patrimoine':'My wealth','Mes comptes':'My accounts','Mes cartes':'My cards','Virements':'Transfers','Mes assurances':'My insurance','Mes crédits':'My loans','Mes documents':'My documents','Documents':'Documents','Messages':'Messages','Téléphone':'Phone','Rendez-vous':'Appointments','Mon profil':'My profile','Changer de profil':'Switch profile','Paramètres':'Settings','Déconnexion':'Sign out','Mes opérations':'My transactions','Mes réglages de compte':'Manage my account','Mes dépenses carte':'My card spending','Mes points et cashback':'My points and cashback','Mes réglages de carte':'Manage my card','Mes blocages de carte':'My card blocks','Nouveau virement':'New transfer','Mes bénéficiaires':'My beneficiaries','Plafonds de virement':'Transfer limits','Virements programmés et prélèvements':'Scheduled transfers and direct debits','Mes avoirs':'My financial assets','Patrimoine net total':'Total net wealth','Mes relevés de compte':'My account statements','Mes autres documents à disposition':'My other available documents','Mes contrats':'My contracts','Ma sécurité':'My security','Mes paramètres de contact':'My contact preferences','Alertes et évènements':'Alerts and events','Patrimoine financier à agréger':'Financial assets to aggregate','Mes coordonnées':'My contact details','Mon identité':'My identity','Ma situation familiale':'My family situation','Mon profil investisseur':'My investor profile'}
+export const TIP={'Accueil':'Home','Mon patrimoine':'My wealth','Mes comptes':'My accounts','Mes cartes':'My cards','Virements':'Transfers','Mes assurances':'My insurance','Mes crédits':'My loans','Mes documents':'My documents','Documents':'Documents','Messages':'Messages','Téléphone':'Phone','Rendez-vous':'Appointments','Mon profil':'My profile','Changer de profil':'Switch profile','Paramètres':'Settings','Déconnexion':'Sign out','Mes opérations':'My transactions','Mes réglages de compte':'Manage my account','Mes dépenses carte':'My card spending','Mes points et cashback':'My points and cashback','Mes réglages de carte':'Manage my card','Mes blocages de carte':'My card blocks','Nouveau virement':'New transfer','Mes bénéficiaires':'My beneficiaries','Plafonds de virement':'Transfer limits','Virements programmés et prélèvements':'Scheduled transfers and direct debits','Mes avoirs':'My financial assets','Patrimoine net total':'Total net wealth','Mes relevés de compte':'My account statements','Mes contrats':'My contracts','Ma sécurité':'My security','Mes paramètres de contact':'My contact preferences','Alertes et évènements':'Alerts and events','Patrimoine financier à agréger':'Financial assets to aggregate','Mes coordonnées':'My contact details','Mon identité':'My identity','Ma situation familiale':'My family situation','Mon profil investisseur':'My investor profile'}

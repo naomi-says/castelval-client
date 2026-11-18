@@ -1154,37 +1154,11 @@ function credits(x) {
 
 function documents(x) {
   const { S, p, A } = x
-  const titles = [
-    'Mes relevés de compte',
-    'Mes autres documents à disposition',
-    'Mes documents',
-    'Mes contrats'
-  ]
+  const titles = ['Mes relevés de compte', 'Mes documents', 'Mes contrats']
   const section = titles[S.t] || titles[0]
 
-  if (S.t === 1) {
-    return (
-      <>
-        {ptitle(section)}
-        <div className="card">
-          <div className="row">
-            <span>
-              Relevé d’identité bancaire
-              <small>Compte de paiement · {p.n}</small>
-            </span>
-            <span>
-              <button className="lnk" onClick={A.rib}>
-                Consulter
-              </button>
-            </span>
-          </div>
-        </div>
-      </>
-    )
-  }
-
-  if (S.t === 2 || S.t === 3) {
-    const sign = S.t === 3
+  if (S.t === 1 || S.t === 2) {
+    const sign = S.t === 2
     return (
       <>
         {ptitle(section)}
