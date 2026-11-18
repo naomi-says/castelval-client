@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useRef, useState } from 'react'
-import { P, NAV, SUBS, IC, TIP, EYE, EYX, COLLAPSE_IC, LOGOUT_IC, R, D, N, MAIL, MAIL_OBJ, RDV_OBJ, setLang } from './data'
+import { P, NAV, SUBS, IC, TIP, EYE, EYX, COLLAPSE_IC, LOGOUT_IC, MSG_IC, TEL_IC, RDV_IC, R, D, N, MAIL, MAIL_OBJ, RDV_OBJ, setLang } from './data'
 import tr from './i18n'
 import { Ic, kv, tb, Sel } from './ui'
 import View from './views'
@@ -1489,13 +1489,16 @@ export default function Portal({ onLogout }) {
             {brand.showName && <span>{brand.name}</span>}
           </div>
           <button className="hm" onClick={() => A.modal('msg')}>
-            Messages <i>1</i>
+            <Ic d={MSG_IC} />
+            <span>Messages</span> <i>1</i>
           </button>
           <button className="hm" onClick={() => A.modal('tel')}>
-            Téléphone
+            <Ic d={TEL_IC} />
+            <span>Téléphone</span>
           </button>
           <button className="hm" onClick={() => A.modal('rdv')}>
-            Rendez-vous
+            <Ic d={RDV_IC} />
+            <span>Rendez-vous</span>
           </button>
           <button
             id="eye"

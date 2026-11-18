@@ -164,6 +164,10 @@ export const IC = {
 export const COLLAPSE_IC = `<path d='M15 6l-6 6 6 6'/>`
 export const LOGOUT_IC = `<path d='M9 4H5v16h4M16 8l4 4-4 4M20 12H9'/>`
 
+export const MSG_IC = `<path d='M3 6h18v12H3z'/><path d='M3 7l9 6 9-6'/>`
+export const TEL_IC = `<path d='M6 3h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 4 5a2 2 0 0 1 2-2z'/>`
+export const RDV_IC = `<path d='M4 6h16v14H4z'/><path d='M4 10h16M9 3v4M15 3v4'/>`
+
 export const EYE = `<path d='M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z'/><circle cx='12' cy='12' r='3'/>`
 export const EYX = EYE + `<path d='M4 4l16 16'/>`
 
