@@ -124,7 +124,7 @@ http.createServer(async (req, res) => {
 |---|---|---|
 | `GET /api/branding` | public | Returns the current settings. |
 | `POST /api/branding/login` | public | Body `{ "password": "…" }` → `{ "token": "…" }`. |
-| `PUT /api/branding` | admin | Replaces the settings (after validation). |
+| `PUT /api/branding` | admin | Replaces the settings (after validation). Admin = header `X-Studio-Token`. |
 | `POST /api/branding/logo` | admin | Body = the raw image file. Replaces the logo. |
 | `DELETE /api/branding/logo` | admin | Removes the custom logo (back to the bundled one). |
 | `GET /api/branding/logo` | public | Serves the logo file. |
@@ -132,6 +132,8 @@ http.createServer(async (req, res) => {
 ### 5.4 Calling it (examples)
 
 ```bash
+# If the site gate is on, add  -u client_demo:<site password>  to every command below (see SITE-GATE.md).
+
 # 1. log in → token
 curl -X POST http://localhost:5173/api/branding/login -d '{"password":"YOUR_PASSWORD"}'
 
@@ -140,18 +142,18 @@ curl http://localhost:5173/api/branding
 
 # 3. save (token required)
 curl -X PUT http://localhost:5173/api/branding \
-  -H "Authorization: Bearer <token>" -H "Content-Type: application/json" \
+  -H "X-Studio-Token: <token>" -H "Content-Type: application/json" \
   -d '{"name":"Acme","colors":{"header":"#0b4f6c"}}'
 
 # 4. upload a logo (the file itself is the body)
 curl -X POST http://localhost:5173/api/branding/logo \
-  -H "Authorization: Bearer <token>" -H "Content-Type: image/png" --data-binary @logo.png
+  -H "X-Studio-Token: <token>" -H "Content-Type: image/png" --data-binary @logo.png
 ```
 
 ### 5.5 Security (what protects it)
 
 - **Password**: from the `BRAND_ADMIN_PASSWORD` env variable. If not set, a random one is generated once, saved in `server/data/admin-password.txt` and printed in the server console. Compared with `crypto.timingSafeEqual`.
-- **Token**: `expiry.signature`, signed with HMAC-SHA256 using `server/data/secret.key`. Valid 8 hours. Sent as `Authorization: Bearer <token>`.
+- **Token**: `expiry.signature`, signed with HMAC-SHA256 using `server/data/secret.key`. Valid 8 hours. Sent in its **own header**, `X-Studio-Token: <token>` — *not* `Authorization`, because the site login (see `SITE-GATE.md`) uses `Authorization` for its Basic credentials and the two would collide.
 - **Brute-force guard**: 5 wrong passwords from one IP → locked for 60 seconds (HTTP 429).
 - **Input is never trusted** — `sanitize()` validates everything on every save: colours must match `#rrggbb` (otherwise `null`), zoom is clamped, text has control characters and `<>` stripped and is length-limited, unknown fields are dropped.
 - **Uploads**: max 2 MB. `sniff()` reads the file's **first bytes** to find the real type (a `.png` that is really HTML is rejected). SVGs containing `<script>`, `on…=` handlers, `javascript:`, `<foreignObject>` etc. are rejected. The logo is served with `X-Content-Type-Options: nosniff` and a restrictive `Content-Security-Policy`.
@@ -239,7 +241,7 @@ If the backend is unreachable, the portal silently keeps the cached copy or the 
 > A hidden URL is **not** the security — the password and token are. The URL is just not linked anywhere.
 
 ### 7.2 Sign-in
-The studio's own `api()` helper calls `POST /api/branding/login`, keeps the token in `sessionStorage` (cleared when the tab closes) and sends it as `Authorization: Bearer …` on every write. A `401` sends the admin back to the sign-in form.
+The studio's own `api()` helper calls `POST /api/branding/login`, keeps the token in `sessionStorage` (cleared when the tab closes) and sends it as `X-Studio-Token: …` on every write. A `401` sends the admin back to the sign-in form.
 
 ### 7.3 Draft vs saved
 The studio keeps two copies of the settings:
@@ -311,7 +313,9 @@ npm start            # production: serves dist/ + the API from one process (PORT
 
 - After pulling this feature, **restart** any running `npm run dev` (the API is loaded through `vite.config.js`).
 - In production the `server/data/` folder **must persist** between deployments (and be backed up) — it holds the saved branding and the logo.
-- A static-only host (no Node process) cannot save settings; the portal would simply show the defaults.
+- > The whole site, including `/admin/branding` and `/api/…`, can additionally sit behind the **site login** — see [SITE-GATE.md](SITE-GATE.md).
+
+A static-only host (no Node process) cannot save settings; the portal would simply show the defaults.
 
 ---
 

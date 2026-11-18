@@ -25,7 +25,7 @@ const LOGO_OK = ['image/png', 'image/jpeg', 'image/webp', 'image/gif', 'image/sv
 /* ---------- API ---------- */
 async function api(path, { method = 'GET', body, token, raw } = {}) {
   const headers = {}
-  if (token) headers.Authorization = 'Bearer ' + token
+  if (token) headers['X-Studio-Token'] = token // not Authorization: the browser uses that for the site login
   let payload
   if (raw) {
     payload = raw

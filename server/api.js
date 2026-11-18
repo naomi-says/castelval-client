@@ -2,7 +2,7 @@
  *
  *   GET    /api/branding            public   current settings (+ logo url)
  *   POST   /api/branding/login      public   { password } -> { token }
- *   PUT    /api/branding            admin    replace settings
+ *   PUT    /api/branding            admin    replace settings   (admin = header  X-Studio-Token: <token>)
  *   POST   /api/branding/logo       admin    raw image body (png/jpeg/webp/gif/svg, <= 2 MB)
  *   DELETE /api/branding/logo       admin    remove the custom logo (back to the bundled one)
  *   GET    /api/branding/logo       public   the custom logo file
@@ -17,7 +17,7 @@ import crypto from 'node:crypto'
 import { fileURLToPath } from 'node:url'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
-const DATA = process.env.BRAND_DATA_DIR || path.join(HERE, 'data')
+export const DATA = process.env.BRAND_DATA_DIR || path.join(HERE, 'data')
 const FILE = path.join(DATA, 'branding.json')
 const PW_FILE = path.join(DATA, 'admin-password.txt')
 const SECRET_FILE = path.join(DATA, 'secret.key')
@@ -124,8 +124,8 @@ const eq = (a, b) => {
   return x.length === y.length && crypto.timingSafeEqual(x, y)
 }
 function isAdmin(req) {
-  const h = req.headers.authorization || ''
-  const t = h.startsWith('Bearer ') ? h.slice(7) : ''
+  // NOT the Authorization header: that one carries the site gate's Basic credentials (see gate.js)
+  const t = String(req.headers['x-studio-token'] || '')
   const [exp, sig] = t.split('.')
   return !!(exp && sig && Number(exp) > Date.now() && eq(sig, sign(exp)))
 }

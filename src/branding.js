@@ -202,7 +202,9 @@ export function useBranding() {
     cb => (subs.add(cb), () => subs.delete(cb)),
     getBranding
   )
-  return { ...b, logoSrc: b.logoUrl || LOGO }
+  // plainName: the default brand is written "Castelval" in running text, while the header shows CASTELVAL
+  const plainName = b.name === DEFAULT_BRANDING.name ? 'Castelval' : b.name
+  return { ...b, logoSrc: b.logoUrl || LOGO, plainName }
 }
 
 export const isPreviewFrame = () => {

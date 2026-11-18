@@ -21,7 +21,7 @@ export default function Login({ onLogin }) {
             onLogin()
           }}
         >
-          <h2>Votre espace client {brand.name}</h2>
+          <h2>Votre espace client {brand.plainName}</h2>
           <span className="hint">Démonstration : cliquez sur « Suivant ».</span>
 
           <label htmlFor="id">Votre identifiant</label>

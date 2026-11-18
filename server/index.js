@@ -1,4 +1,5 @@
-/* Production server: serves the built portal (dist/) and the branding API from one process.
+/* Production server: serves the built portal (dist/) and the branding API from one process,
+ * behind the site login (see gate.js).
  *   npm run build && npm start        (PORT=3000 by default)
  */
 import http from 'node:http'
@@ -6,6 +7,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { handleApi, passwordSource, adminPassword } from './api.js'
+import { gate, gateInfo } from './gate.js'
 
 const DIST = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'dist')
 const PORT = Number(process.env.PORT) || 3000
@@ -28,6 +30,7 @@ if (!fs.existsSync(path.join(DIST, 'index.html'))) {
 
 http
   .createServer(async (req, res) => {
+    if (gate(req, res)) return // site login first: nothing is served until it passes
     if (await handleApi(req, res)) return
     const pathname = decodeURIComponent(new URL(req.url, 'http://x').pathname)
     let file = path.join(DIST, pathname)
@@ -44,7 +47,11 @@ http
     fs.createReadStream(file).pipe(res)
   })
   .listen(PORT, () => {
+    const g = gateInfo()
     console.log(`Castelval portal  → http://localhost:${PORT}`)
+    console.log(
+      g.enabled ? `Site login        → user: ${g.user}   password: ${g.password}  [${g.source}]` : 'Site login        → OFF (SITE_GATE=off)'
+    )
     console.log(`Brand studio      → http://localhost:${PORT}/admin/branding`)
     console.log(`Studio password   → ${process.env.BRAND_ADMIN_PASSWORD ? '(from BRAND_ADMIN_PASSWORD)' : adminPassword}  [${passwordSource}]`)
   })

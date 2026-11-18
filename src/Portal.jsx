@@ -1644,7 +1644,7 @@ export default function Portal({ onLogout }) {
                 <button onClick={() => A.modal('a11y')}>Accessibilité</button>
               </div>
               <div className="af-bottom">
-                <span>© 2026 {brand.name}</span>
+                <span>© 2026 {brand.plainName}</span>
                 <span>Votre espace client</span>
               </div>
             </div>
