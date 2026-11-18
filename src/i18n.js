@@ -235,6 +235,12 @@ const EN = {
   /* documents */
   'Mes relevés de compte': 'My account statements',
   'Mes contrats': 'My contracts',
+  'Signés': 'Signed',
+  'Non signés': 'Unsigned',
+  'Aucun contrat signé': 'No signed contracts',
+  'Vous retrouverez ici vos contrats signés.': 'Your signed contracts will appear here.',
+  'Aucune signature en attente': 'No signature pending',
+  'Vous retrouverez ici les documents nécessitant votre signature.': 'Documents awaiting your signature will appear here.',
   'Relevé de compte —': 'Account statement —',
   'Septembre 2026': 'September 2026',
   'Août 2026': 'August 2026',

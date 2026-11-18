@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { P, LIM, R, D, N, LOGO } from './data'
 import { getBranding, useBranding } from './branding'
 import { hd, kv, tb, bar, swRow, OpsTable, Sel } from './ui'
@@ -1152,29 +1152,77 @@ function credits(x) {
   )
 }
 
+const FOLDER_IC = 'M3 7h6l2 2h10v11H3z'
+const SIGN_IC = 'M7 3h7l5 5v13H7zM14 3v5h5'
+
+function emptyCard(icon, title, text) {
+  return (
+    <div className="card">
+      <div className="dlg-empty">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d={icon} />
+        </svg>
+        <b>{title}</b>
+        <p>{text}</p>
+      </div>
+    </div>
+  )
+}
+
+/* Mes contrats — signed and unsigned sections, rectangular tabs like the transfer steps */
+function Contracts({ en }) {
+  const [tab, setTab] = useState(0)
+  return tr(
+    <>
+      <div className="st" role="tablist" aria-label="Mes contrats">
+        {['Signés', 'Non signés'].map((label, i) => (
+          <button
+            key={label}
+            type="button"
+            role="tab"
+            aria-selected={tab === i}
+            className={tab === i ? 'on' : ''}
+            onClick={() => setTab(i)}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+      {tab === 0
+        ? emptyCard(SIGN_IC, 'Aucun contrat signé', 'Vous retrouverez ici vos contrats signés.')
+        : emptyCard(
+            SIGN_IC,
+            'Aucune signature en attente',
+            'Vous retrouverez ici les documents nécessitant votre signature.'
+          )}
+    </>,
+    en
+  )
+}
+
 function documents(x) {
-  const { S, p, A } = x
+  const { S, p, A, en } = x
   const titles = ['Mes relevés de compte', 'Mes documents', 'Mes contrats']
   const section = titles[S.t] || titles[0]
 
-  if (S.t === 1 || S.t === 2) {
-    const sign = S.t === 2
+  if (S.t === 1) {
     return (
       <>
         {ptitle(section)}
-        <div className="card">
-          <div className="dlg-empty">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d={sign ? 'M7 3h7l5 5v13H7zM14 3v5h5' : 'M3 7h6l2 2h10v11H3z'} />
-            </svg>
-            <b>{sign ? 'Aucune signature en attente' : 'Votre dossier est à jour'}</b>
-            <p>
-              {sign
-                ? 'Vous retrouverez ici les documents nécessitant votre signature.'
-                : 'Aucun document n’est demandé dans ce profil de démonstration.'}
-            </p>
-          </div>
-        </div>
+        {emptyCard(
+          'M3 7h6l2 2h10v11H3z',
+          'Votre dossier est à jour',
+          'Aucun document n’est demandé dans ce profil de démonstration.'
+        )}
+      </>
+    )
+  }
+
+  if (S.t === 2) {
+    return (
+      <>
+        {ptitle(section)}
+        <Contracts en={en} />
       </>
     )
   }
