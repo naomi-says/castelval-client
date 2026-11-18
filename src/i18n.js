@@ -235,6 +235,13 @@ const EN = {
   /* documents */
   'Mes relevés de compte': 'My account statements',
   'Mes autres documents à disposition': 'My other available documents',
+  'Attestation d’assurance santé': 'Health insurance certificate',
+  'Conditions générales santé': 'Health insurance terms',
+  'Acte de propriété': 'Title deed',
+  'Offre de prêt immobilier': 'Mortgage offer',
+  'Contrat santé Famille · 01/09/2026': 'Family health plan · 01/09/2026',
+  'Résidence principale · 14/06/2024': 'Main residence · 14/06/2024',
+  'Crédit immobilier · 14/06/2024': 'Mortgage · 14/06/2024',
   'Mes contrats': 'My contracts',
   'Signés': 'Signed',
   'Non signés': 'Unsigned',

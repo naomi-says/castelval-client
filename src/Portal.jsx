@@ -343,6 +343,9 @@ export default function Portal({ onLogout }) {
     stm() {
       toast('Relevé en cours de génération (démonstration).')
     },
+    dfile(name) {
+      toast('Ouverture de « ' + name + ' » (démonstration).')
+    },
     conn() {
       setDialog({ kind: 'conn' })
     },

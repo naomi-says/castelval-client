@@ -1211,21 +1211,33 @@ function documents(x) {
   const section = titles[S.t] || titles[0]
 
   if (S.t === 1) {
+    const others = [
+      ['Attestation d’assurance santé', 'Contrat santé Famille · 01/09/2026'],
+      ['Conditions générales santé', 'Contrat santé Famille · 01/09/2026'],
+      ['Acte de propriété', 'Résidence principale · 14/06/2024'],
+      ['Offre de prêt immobilier', 'Crédit immobilier · 14/06/2024']
+    ]
     return (
       <>
         {ptitle(section)}
         <div className="card">
-          <div className="row">
-            <span>
-              Relevé d’identité bancaire
-              <small>Compte de paiement · {p.n}</small>
-            </span>
-            <span>
-              <button className="lnk" onClick={A.rib}>
-                Consulter
-              </button>
-            </span>
-          </div>
+          {others.map(([name, detail]) => (
+            <div className="row" key={name}>
+              <span>
+                {name}
+                <small>{detail}</small>
+              </span>
+              <span>
+                <button className="lnk" onClick={() => A.dfile(name)}>
+                  Consulter
+                </button>{' '}
+                ·{' '}
+                <button className="lnk" onClick={() => A.dfile(name)}>
+                  Télécharger
+                </button>
+              </span>
+            </div>
+          ))}
         </div>
       </>
     )
