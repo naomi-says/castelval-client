@@ -31,7 +31,14 @@ function home(x) {
       <p className="greet-sub">Heureux de vous retrouver.</p>
       <div className="grid" style={{ marginTop: 18 }}>
         <div className="card c6">
-          <h3>Mes comptes et épargne de précaution</h3>
+          <div className="hc-head">
+            <svg className="hic" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="2.5" y="6.5" width="19" height="13" rx="2.5" />
+              <path d="M2.5 10.5h19" />
+              <circle cx="17.2" cy="15.2" r="1.1" />
+            </svg>
+            <h3>Mes comptes et épargne de précaution</h3>
+          </div>
           {p.acc.map((a, i) => (
             <div className="row" key={i}>
               <span>{a[0]}</span>
@@ -44,7 +51,14 @@ function home(x) {
 
         <div className="card c6">
           <div className="row">
-            <h3>Mon patrimoine</h3>
+            <div className="hc-head">
+              <svg className="hic" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 20h18" />
+                <path d="M5 20V9.5M9.5 20V9.5M14.5 20V9.5M19 20V9.5" />
+                <path d="M3 9.5L12 4l9 5.5z" />
+              </svg>
+              <h3>Mon patrimoine</h3>
+            </div>
             <button className="lnk" onClick={() => A.go('patrimoine')} aria-label="Voir le détail du patrimoine">
               ›
             </button>
@@ -65,7 +79,13 @@ function home(x) {
 
         <div className="card c6">
           <div className="row">
-            <h3>Mon cashback et mes Points Castelval</h3>
+            <div className="hc-head">
+              <svg className="hic" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="8.5" />
+                <path d="M14.9 9.1a3.6 3.6 0 1 0 0 5.8" />
+              </svg>
+              <h3>Mon cashback et mes Points Castelval</h3>
+            </div>
             <button className="lnk" onClick={() => A.go('cartes', 1)} aria-label="Voir mes points et mon cashback">
               ›
             </button>
@@ -78,7 +98,13 @@ function home(x) {
 
         <div className="card c6">
           <div className="row">
-            <h3>Souscrire</h3>
+            <div className="hc-head">
+              <svg className="hic" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="8.5" />
+                <path d="M12 8v8M8 12h8" />
+              </svg>
+              <h3>Souscrire</h3>
+            </div>
             <button className="lnk" onClick={() => A.go('souscription')} aria-label="Souscrire">
               ›
             </button>
