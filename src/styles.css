@@ -687,6 +687,7 @@ select{width:100%;padding:12px;border:1px solid var(--line);border-radius:8px;ba
 .ledger-title{margin:0;font-family:inherit;font-size:calc(17px + 1pt);font-weight:700;line-height:1.4;color:var(--th-deep)}
 .card .ledger-title,.card-panel .ledger-title{font-size:calc(17px + 1pt);margin:0}
 .ledger-title::after{content:'';display:block;width:44px;height:2px;background:var(--gold);margin-top:6px}
+.ledger-title.no-rule::after{content:none}
 .ledger-balance{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 12px}
 .ledger-balance span{font-size:calc(12px + 1pt);line-height:1.35;color:var(--ink)}
 .ledger-balance b{font-size:calc(15px + 1pt);font-weight:700;line-height:1.35;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}

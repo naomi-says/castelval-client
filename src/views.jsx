@@ -1073,7 +1073,7 @@ function virements(x) {
       {h}
       <div className="card">
         <div className="ledger-head">
-          <h3 className="ledger-title">Virements programmés et prélèvements</h3>
+          <h3 className="ledger-title no-rule">Virements programmés et prélèvements</h3>
         </div>
         <OpsTable rows={p.up} sort={S.sort} onSort={A.sort} E={E} variant="scheduled" />
         <div className="acts">
