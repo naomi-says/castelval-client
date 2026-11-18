@@ -1357,7 +1357,7 @@ export default function Portal({ onLogout }) {
         return (
           <>
             <small className="eyebrow">VOTRE ESPACE CASTELVAL</small>
-            <h3>Mes devis et contrats à signer</h3>
+            <h3>Mes contrats</h3>
             <div className="dlg-empty">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M7 3h7l5 5v13H7zM14 3v5h5" />
