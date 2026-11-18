@@ -235,7 +235,6 @@ const EN = {
   /* documents */
   'Mes relevés de compte': 'My account statements',
   'Mes autres documents à disposition': 'My other available documents',
-  'Mes documents à transmettre': 'Documents to submit',
   'Mes devis et contrats à signer': 'Quotes and contracts to sign',
   'Relevé de compte —': 'Account statement —',
   'Septembre 2026': 'September 2026',

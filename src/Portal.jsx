@@ -1343,7 +1343,7 @@ export default function Portal({ onLogout }) {
         return (
           <>
             <small className="eyebrow">VOTRE ESPACE CASTELVAL</small>
-            <h3>Mes documents à transmettre</h3>
+            <h3>Mes documents</h3>
             <div className="dlg-empty">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M3 7h6l2 2h10v11H3z" />

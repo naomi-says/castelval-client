@@ -1157,7 +1157,7 @@ function documents(x) {
   const titles = [
     'Mes relevés de compte',
     'Mes autres documents à disposition',
-    'Mes documents à transmettre',
+    'Mes documents',
     'Mes devis et contrats à signer'
   ]
   const section = titles[S.t] || titles[0]
