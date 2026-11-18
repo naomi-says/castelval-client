@@ -5,3 +5,5 @@ mobile/node_modules/
 mobile/.expo/
 mobile/dist/
 mobile/web-build/
+
+server/data/

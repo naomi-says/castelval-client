@@ -1,8 +1,9 @@
 import { Fragment, useEffect, useRef, useState } from 'react'
-import { P, NAV, SUBS, IC, TIP, EYE, EYX, COLLAPSE_IC, LOGOUT_IC, LOGO, R, D, N, MAIL, MAIL_OBJ, RDV_OBJ, setLang } from './data'
+import { P, NAV, SUBS, IC, TIP, EYE, EYX, COLLAPSE_IC, LOGOUT_IC, R, D, N, MAIL, MAIL_OBJ, RDV_OBJ, setLang } from './data'
 import tr from './i18n'
 import { Ic, kv, tb, Sel } from './ui'
 import View from './views'
+import { useBranding } from './branding'
 
 /* Same initial state as init() in the original script */
 const initState = () => ({
@@ -65,6 +66,7 @@ const cut = s => {
 }
 
 export default function Portal({ onLogout }) {
+  const brand = useBranding()
   const [S, setS] = useState(initState)
   const [dialog, setDialog] = useState(null)
   const [toastMsg, setToastMsg] = useState(null)
@@ -1480,8 +1482,8 @@ export default function Portal({ onLogout }) {
             ☰
           </button>
           <div className="brand">
-            <img src={LOGO} alt="" />
-            <span>CASTELVAL</span>
+            {brand.showLogo && <img src={brand.logoSrc} alt="" />}
+            {brand.showName && <span>{brand.name}</span>}
           </div>
           <button className="hm" onClick={() => A.modal('msg')}>
             Messages <i>1</i>
@@ -1627,7 +1629,7 @@ export default function Portal({ onLogout }) {
                 <button onClick={() => A.modal('a11y')}>Accessibilité</button>
               </div>
               <div className="af-bottom">
-                <span>© 2026 Castelval</span>
+                <span>© 2026 {brand.name}</span>
                 <span>Votre espace client</span>
               </div>
             </div>

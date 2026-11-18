@@ -1,5 +1,6 @@
 import { Fragment } from 'react'
 import { P, LIM, R, D, N, LOGO } from './data'
+import { getBranding, useBranding } from './branding'
 import { hd, kv, tb, bar, swRow, OpsTable, Sel } from './ui'
 import tr from './i18n'
 
@@ -592,6 +593,7 @@ function comptes(x) {
 
 function cartes(x) {
   const { S, p, E, A } = x
+  const brand = getBranding()
   const c = p.card
 
   if (!c) {
@@ -765,8 +767,8 @@ function cartes(x) {
           <div className="card-art" aria-hidden="true">
             <div className="chip" />
             <div className="brandline">
-              <img src={LOGO} alt="" />
-              <span>CASTELVAL</span>
+              {brand.showLogo && <img src={brand.logoUrl || LOGO} alt="" />}
+              {brand.showName && <span>{brand.name}</span>}
             </div>
             <div className="visa">VISA</div>
           </div>
@@ -1578,6 +1580,7 @@ const V = {
 }
 
 export default function View({ x }) {
+  useBranding() // re-render the page when the branding changes
   const fn = V[x.S.r] || home
   return tr(fn(x), x.en)
 }

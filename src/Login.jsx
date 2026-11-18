@@ -1,16 +1,17 @@
 import { useState } from 'react'
-import { LOGO } from './data'
+import { useBranding } from './branding'
 
 export default function Login({ onLogin }) {
   const [id, setId] = useState('DEMO2026')
   const [pw, setPw] = useState('demo1234')
+  const brand = useBranding()
 
   return (
     <section id="login">
       <div className="lv">
-        <img src={LOGO} alt="Castelval Finance" />
-        <h1>CASTELVAL</h1>
-        <p>FINANCE</p>
+        {brand.showLogo && <img src={brand.logoSrc} alt={brand.name} />}
+        {brand.showName && brand.name && <h1>{brand.name}</h1>}
+        {brand.tagline && <p>{brand.tagline}</p>}
         <small>Votre patrimoine, suivi en toute transparence avec votre conseiller dédié.</small>
       </div>
       <div className="lf">
@@ -20,7 +21,7 @@ export default function Login({ onLogin }) {
             onLogin()
           }}
         >
-          <h2>Votre espace client Castelval</h2>
+          <h2>Votre espace client {brand.name}</h2>
           <span className="hint">Démonstration : cliquez sur « Suivant ».</span>
 
           <label htmlFor="id">Votre identifiant</label>
