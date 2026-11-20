@@ -409,5 +409,20 @@ export const EXTRA: Record<string, string> = {
   'Mon patrimoine': 'My wealth',
   'Virements': 'Transfers',
   'Plafonds de virement': 'Transfer limits',
-  'Mes bénéficiaires': 'My beneficiaries'
+  'Mes bénéficiaires': 'My beneficiaries',
+  'Mes contrats': 'My contracts',
+  'Signés': 'Signed',
+  'Non signés': 'Unsigned',
+  'Aucun contrat signé': 'No signed contracts',
+  'Vous retrouverez ici vos contrats signés.': 'Your signed contracts will appear here.',
+  'Ouverture de': 'Opening',
+  'démonstration': 'demo',
+  'Documents': 'Documents',
+  'Attestation d’assurance santé': 'Health insurance certificate',
+  'Conditions générales santé': 'Health insurance terms',
+  'Acte de propriété': 'Title deed',
+  'Offre de prêt immobilier': 'Mortgage offer',
+  'Contrat santé Famille · 01/09/2026': 'Family health contract · 01/09/2026',
+  'Résidence principale · 14/06/2024': 'Main residence · 14/06/2024',
+  'Crédit immobilier · 14/06/2024': 'Mortgage · 14/06/2024'
 }

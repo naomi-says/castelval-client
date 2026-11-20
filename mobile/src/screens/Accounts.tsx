@@ -3,7 +3,7 @@ import { Pressable, Share, View } from 'react-native'
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native'
 import { Icon } from '../components/Icon'
 import {
-  Button, Card, Divider, Empty, Field, DateField, Heading, KVList, ListRow, Row, Screen, SectionTitle, SelectField, SwitchRow, Tag, Txt, useJob, useToast
+  Button, Card, Divider, Empty, Field, DateField, Heading, KVList, ListRow, RectTabs, Row, Screen, SectionTitle, SelectField, SwitchRow, Tag, Txt, useJob, useToast
 } from '../components/ui'
 import { P, TxRow } from '../data/data'
 import { exportPdf, previewPdf } from '../services/exporter'
@@ -320,19 +320,47 @@ export function Statements() {
           ))}
         </Card>
       )}
-      <ListRow icon="folder" title="Autres documents à disposition" onPress={() => nav.navigate('OtherDocuments')} />
-      <ListRow icon="documents" title="Mes documents à transmettre" onPress={() => nav.navigate('DocsToSend')} />
-      <ListRow icon="documents" title="Mes devis et contrats à signer" onPress={() => nav.navigate('DocsToSign')} />
+      <Card style={{ paddingVertical: 4 }}>
+        <ListRow icon="folder" title="Mes autres documents à disposition" onPress={() => nav.navigate('OtherDocuments')} />
+        <ListRow icon="folder" title="Mes documents" onPress={() => nav.navigate('DocsToSend')} />
+        <ListRow icon="documents" title="Mes contrats" onPress={() => nav.navigate('DocsToSign')} />
+      </Card>
     </Screen>
   )
 }
 
+/* website: "Mes autres documents à disposition" — contract paperwork, each with view / download */
+const OTHER_DOCS: [string, string][] = [
+  ['Attestation d’assurance santé', 'Contrat santé Famille · 01/09/2026'],
+  ['Conditions générales santé', 'Contrat santé Famille · 01/09/2026'],
+  ['Acte de propriété', 'Résidence principale · 14/06/2024'],
+  ['Offre de prêt immobilier', 'Crédit immobilier · 14/06/2024']
+]
 export function OtherDocuments() {
-  const nav = useNavigation<any>()
+  const toast = useToast()
+  const { t } = usePortal()
+  const open = (name: string) => toast(`${t('Ouverture de')} « ${t(name)} » (${t('démonstration')}).`)
   return (
     <Screen>
-      <Card>
-        <ListRow title="Relevé d’identité bancaire" right="Consulter" onPress={() => nav.navigate('Rib')} />
+      <Card style={{ paddingVertical: 4 }}>
+        {OTHER_DOCS.map(([name, detail], i) => (
+          <View key={name}>
+            {i > 0 && <Divider />}
+            <View style={{ paddingVertical: 12, gap: 8 }}>
+              <View style={{ flexDirection: 'row', gap: 10, alignItems: 'center' }}>
+                <Icon name="documents" size={24} color="#c9a227" />
+                <View style={{ flex: 1 }}>
+                  <Txt v="label">{name}</Txt>
+                  <Txt v="small">{detail}</Txt>
+                </View>
+              </View>
+              <View style={{ flexDirection: 'row', gap: 10 }}>
+                <Button title="Consulter" kind="outline" style={{ flex: 1, minHeight: 42 }} onPress={() => open(name)} />
+                <Button title="Télécharger" style={{ flex: 1, minHeight: 42 }} onPress={() => open(name)} />
+              </View>
+            </View>
+          </View>
+        ))}
       </Card>
     </Screen>
   )
@@ -342,11 +370,20 @@ export const DocsToSend = () => (
     <Empty icon="folder" title="Votre dossier est à jour" text="Aucun document n’est demandé dans ce profil de démonstration." />
   </Screen>
 )
-export const DocsToSign = () => (
-  <Screen>
-    <Empty icon="documents" title="Aucune signature en attente" text="Vous retrouverez ici les documents nécessitant votre signature." />
-  </Screen>
-)
+/* website: "Mes contrats" — signed / unsigned sections on rectangular tabs */
+export function DocsToSign() {
+  const [tab, setTab] = useState(0)
+  return (
+    <Screen>
+      <RectTabs items={['Signés', 'Non signés']} index={tab} onChange={setTab} />
+      {tab === 0 ? (
+        <Empty icon="documents" title="Aucun contrat signé" text="Vous retrouverez ici vos contrats signés." />
+      ) : (
+        <Empty icon="documents" title="Aucune signature en attente" text="Vous retrouverez ici les documents nécessitant votre signature." />
+      )}
+    </Screen>
+  )
+}
 
 export function Rib() {
   const { p, lang } = usePortal()

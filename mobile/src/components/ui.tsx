@@ -181,7 +181,7 @@ export const KVList = ({ rows }: { rows: [string, string][] }) => (
  *  - 'short': 44×2 bar below the text (.ledger-title)
  */
 export function Heading({ children, v = 'h3', rule = 'line', raw, style }: {
-  children: React.ReactNode; v?: Variant; rule?: 'line' | 'bar' | 'short'; raw?: boolean; style?: StyleProp<ViewStyle>
+  children: React.ReactNode; v?: Variant; rule?: 'line' | 'bar' | 'short' | 'none'; raw?: boolean; style?: StyleProp<ViewStyle>
 }) {
   const c = useTheme()
   const bar = rule === 'bar' ? { width: 100, height: 4, marginTop: 10 } : rule === 'short' ? { width: 44, height: 2, marginTop: 6 } : null
@@ -462,6 +462,37 @@ export function Segmented({ items, index, onChange }: { items: string[]; index: 
         )
       })}
     </ScrollView>
+  )
+}
+
+
+/* Rectangular joined tabs — the website's `.st` bar (transfer steps, Mes contrats). */
+export function RectTabs({ items, index, onChange, compact, disabled }: {
+  items: string[]; index: number; onChange?: (i: number) => void; compact?: boolean; disabled?: (i: number) => boolean
+}) {
+  const c = useTheme()
+  return (
+    <View style={{ flexDirection: 'row', borderWidth: 1, borderColor: '#C5D9EE', borderRadius: 6, overflow: 'hidden', backgroundColor: c.card }}>
+      {items.map((it, i) => {
+        const on = i === index
+        const off = !!disabled && disabled(i)
+        return (
+          <Pressable
+            key={i}
+            accessibilityRole="tab"
+            accessibilityState={{ selected: on, disabled: off }}
+            disabled={off || on || !onChange}
+            onPress={() => onChange && onChange(i)}
+            style={{
+              flex: 1, minHeight: compact ? 38 : 46, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 4,
+              backgroundColor: on ? '#00244D' : c.card, borderLeftWidth: i > 0 ? 1 : 0, borderLeftColor: '#C5D9EE', opacity: off && !on ? 0.45 : 1
+            }}
+          >
+            <Txt color={on ? '#fff' : '#00244D'} style={{ fontFamily: on ? fonts.sansBold : fonts.sansSemi, fontSize: 14, textAlign: 'center' }}>{it}</Txt>
+          </Pressable>
+        )
+      })}
+    </View>
   )
 }
 

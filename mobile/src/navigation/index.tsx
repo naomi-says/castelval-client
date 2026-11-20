@@ -123,6 +123,12 @@ const SUBS: Record<string, { label: string; hint?: string; go: (n: any) => void 
     { label: 'Mes bénéficiaires', go: n => n.navigate('Beneficiaries') },
     { label: 'Plafonds de virement', go: n => n.navigate('TransferLimits') },
     { label: 'Virements programmés et prélèvements', go: n => n.navigate('Scheduled') }
+  ],
+  documents: [
+    { label: 'Mes relevés de compte', go: n => n.navigate('Statements') },
+    { label: 'Mes autres documents à disposition', go: n => n.navigate('OtherDocuments') },
+    { label: 'Mes documents', go: n => n.navigate('DocsToSend') },
+    { label: 'Mes contrats', go: n => n.navigate('DocsToSign') }
   ]
 }
 
@@ -150,7 +156,7 @@ function DrawerContent({ navigation, state }: DrawerContentComponentProps) {
     { k: 'virements', label: 'Virements', onPress: tab('Transfers') },
     { k: 'assurances', label: 'Mes assurances', onPress: () => nav.navigate('Insurance') },
     { k: 'credits', label: 'Mes crédits', onPress: () => nav.navigate('Credits') },
-    { k: 'documents', label: 'Mes relevés de compte', onPress: () => nav.navigate('Statements') }
+    { k: 'documents', label: 'Documents', onPress: () => nav.navigate('Statements') }
   ]
   const s = useStyles(col => ({
     wrap: { flex: 1, backgroundColor: col.side },
@@ -167,9 +173,10 @@ function DrawerContent({ navigation, state }: DrawerContentComponentProps) {
     seg: { flexDirection: 'row', backgroundColor: '#ffffff14', borderRadius: 999, padding: 3 },
     segBtn: { flex: 1, alignItems: 'center', paddingVertical: 8, borderRadius: 999 }
   }))
-  const Item = ({ label, onPress, chev, badge, on }: { label: string; onPress: () => void; chev?: 'up' | 'down'; badge?: number; on?: boolean }) => (
+  const Item = ({ label, onPress, chev, badge, on, icon }: { label: string; onPress: () => void; chev?: 'up' | 'down'; badge?: number; on?: boolean; icon?: string }) => (
     <Pressable onPress={onPress} accessibilityRole="button" style={({ pressed }) => [s.item, on && s.on, pressed && { opacity: 0.7 }]}>
       {on && <View style={s.bar} />}
+      {icon ? <Icon name={icon} size={20} color={on ? '#fff' : '#dbe4f3'} /> : null}
       <Txt color={on ? '#fff' : '#dbe4f3'} style={{ flex: 1, fontFamily: on ? fonts.sansBold : fonts.sansSemi, fontSize: 15.5 }}>{label}</Txt>
       {badge ? (
         <View style={{ backgroundColor: c.gold, borderRadius: 10, minWidth: 20, alignItems: 'center', paddingHorizontal: 5, paddingVertical: 1 }}>
@@ -225,9 +232,9 @@ function DrawerContent({ navigation, state }: DrawerContentComponentProps) {
             </View>
           )
         })}
-        <Item label="Messages" badge={unread} onPress={go(() => nav.navigate('Messages'))} />
-        <Item label="Téléphone" onPress={go(() => nav.navigate('Contact'))} />
-        <Item label="Rendez-vous" onPress={go(() => nav.navigate('Appointment'))} />
+        <Item icon="mail" label="Messages" badge={unread} onPress={go(() => nav.navigate('Messages'))} />
+        <Item icon="phone" label="Téléphone" onPress={go(() => nav.navigate('Contact'))} />
+        <Item icon="cal" label="Rendez-vous" onPress={go(() => nav.navigate('Appointment'))} />
         <Item label="Notre offre" onPress={go(() => nav.navigate('Subscribe'))} />
         <Item label="Mon profil" onPress={go(() => nav.navigate('Profile'))} />
         <Item label="Paramètres" onPress={go(() => nav.navigate('Settings'))} />
@@ -293,9 +300,9 @@ export default function RootNavigator() {
             <Stack.Screen name="AccountManage" component={AccountManage} options={o('Gérer le compte')} />
             <Stack.Screen name="OperationDetail" component={OperationDetail} options={o('Détail de l’opération')} />
             <Stack.Screen name="Statements" component={Statements} options={o('Mes relevés de compte')} />
-            <Stack.Screen name="OtherDocuments" component={OtherDocuments} options={o('Autres documents à disposition')} />
-            <Stack.Screen name="DocsToSend" component={DocsToSend} options={o('Mes documents à transmettre')} />
-            <Stack.Screen name="DocsToSign" component={DocsToSign} options={o('Mes devis et contrats à signer')} />
+            <Stack.Screen name="OtherDocuments" component={OtherDocuments} options={o('Mes autres documents à disposition')} />
+            <Stack.Screen name="DocsToSend" component={DocsToSend} options={o('Mes documents')} />
+            <Stack.Screen name="DocsToSign" component={DocsToSign} options={o('Mes contrats')} />
             <Stack.Screen name="Rib" component={Rib} options={o('Relevé d’identité bancaire')} />
             {/* cards */}
             <Stack.Screen name="CardPoints" component={CardPoints} options={o('Mes points et cashback')} />

@@ -3,7 +3,7 @@ import { Pressable, View } from 'react-native'
 import { CommonActions, useNavigation, useRoute, RouteProp } from '@react-navigation/native'
 import { TrustedApproval } from '../components/Approval'
 import { Icon } from '../components/Icon'
-import { Bar, Button, Card, DateField, Empty, ErrorText, Field, KVList, ListRow, Row, Screen, SelectField, Tag, Txt, useToast } from '../components/ui'
+import { Bar, Button, Card, DateField, Empty, ErrorText, Field, Heading, KVList, ListRow, RectTabs, Row, Screen, SelectField, Tag, Txt, useToast } from '../components/ui'
 import { LIM } from '../data/data'
 import { RootStackParamList } from '../navigation/types'
 import {
@@ -35,15 +35,31 @@ const TO_TRANSFERS = { screen: 'Tabs', params: { screen: 'Transfers' } }
 
 /* ───────── wizard ───────── */
 const STEPS = ['Compte à débiter', 'Compte à créditer', 'Montant et caractéristiques', 'Récapitulatif', 'Confirmation']
-function Steps({ step }: { step: number }) {
+const STEP_ROUTES = ['TfFrom', 'TfTo', 'TfAmount', 'TfReview', 'TfApproval']
+/* Compact rectangular step tabs (website `.st`). Steps 1–4 can be jumped to; the approval and
+   confirmation steps only follow from "Approuver le virement". `beforeJump` lets the amount
+   screen hand over what was typed so it reaches the summary. */
+function Steps({ step, beforeJump, locked }: { step: number; beforeJump?: () => Record<string, any>; locked?: boolean }) {
+  const nav = useNavigation<any>()
+  const { S, A } = usePortal()
   const c = useTheme()
+  const jump = (i: number) => {
+    const f = { ...S.tf, ...(beforeJump ? beforeJump() : {}) }
+    const d = f.d !== undefined ? f.d : 0
+    const patch: Record<string, any> = { ...f, d, c: f.c || defaultCredit(d), dt: f.dt || DEFAULT_EXEC_DATE }
+    if (i >= 3 && f.m === undefined) patch.m = 500
+    A.setTf(patch)
+    nav.dispatch(CommonActions.reset({ index: i + 1, routes: [{ name: 'Main', params: TO_TRANSFERS }, ...STEP_ROUTES.slice(0, i + 1).map(name => ({ name }))] }))
+  }
   return (
-    <View style={{ gap: 8 }}>
-      <View style={{ flexDirection: 'row', gap: 6 }}>
-        {STEPS.map((_, i) => (
-          <View key={i} style={{ flex: 1, height: 5, borderRadius: 3, backgroundColor: i <= step ? c.gold : c.line }} />
-        ))}
-      </View>
+    <View style={{ gap: 6 }}>
+      <RectTabs
+        compact
+        items={STEPS.map((_, i) => String(i + 1))}
+        index={step}
+        onChange={jump}
+        disabled={i => !!locked || i > 3 || i === 4}
+      />
       <Txt v="small" raw>
         {step + 1}/{STEPS.length} · <Txt v="small" color={c.heading}>{STEPS[step]}</Txt>
       </Txt>
@@ -129,7 +145,7 @@ export function TfAmount() {
         </>
       }
     >
-      <Steps step={2} />
+      <Steps step={2} beforeJump={() => { const n = parseAmount(m); return { ...(n > 0 ? { m: n } : {}), dt, mo } }} />
       <Card>
         <Txt>Solde disponible : <Txt v="bold" raw>{fmt.E(d[2])}</Txt></Txt>
         <Txt>Plafond de virement disponible (1 jour) : <Txt v="bold" raw>{fmt.E(dailyTransferAvailable())}</Txt></Txt>
@@ -220,7 +236,7 @@ export function TfDone() {
         </>
       }
     >
-      <Steps step={4} />
+      <Steps step={4} locked />
       <Card>
         <View style={{ alignItems: 'center', gap: 8 }}>
           <Icon name="check" size={44} color="#1f7a4d" />
@@ -335,7 +351,12 @@ export function Scheduled() {
   const nav = useNavigation<any>()
   return (
     <Screen footer={<Button title="Gérer un élément" kind="outline" onPress={() => nav.navigate('ManageUpcoming')} />}>
-      <Card><Upcoming /></Card>
+      <Card>
+        {/* heading without the gold rule, as on the website */}
+        <Heading rule="none">Virements programmés et prélèvements</Heading>
+        <Upcoming />
+        <Txt v="small">Données de démonstration. Les opérations à venir sont prévisionnelles et ne sont pas incluses dans le solde disponible.</Txt>
+      </Card>
     </Screen>
   )
 }
