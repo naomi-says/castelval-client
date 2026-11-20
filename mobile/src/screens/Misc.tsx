@@ -39,8 +39,8 @@ const INFO: Record<InfoKind, { title: string; paras: [string | null, string][] }
   faq: {
     title: 'Questions fréquentes',
     paras: [
-      ['Comment revenir à l’accueil ?', 'Sélectionnez « Accueil » dans le menu ou touchez l’onglet Accueil.'],
-      ['Comment parcourir les rubriques ?', 'Ouvrez le menu pour déplier les sous-rubriques, puis touchez un élément pour afficher son aperçu.'],
+      ['Comment revenir à l’accueil ?', 'Sélectionnez « Accueil » dans le menu ou cliquez sur le logo Castelval.'],
+      ['Comment parcourir les rubriques ?', 'Cliquez sur les menus pour déplier les sous-rubriques, puis sur un élément pour afficher son aperçu.'],
       ['Est-ce un compte réel ?', 'Non. Les actions et les informations servent uniquement à la démonstration.']
     ]
   },
