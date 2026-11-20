@@ -14,7 +14,7 @@ export const EXTRA: Record<string, string> = {
   'Les montants et opérations présentés servent uniquement à la démonstration.': 'The amounts and transactions shown are for demonstration purposes only.',
   'Une erreur est survenue. Veuillez réessayer.': 'Something went wrong. Please try again.',
   /* login */
-  'Votre patrimoine, suivi en toute transparence avec votre conseiller dédié.': 'Your wealth, followed with full transparency by your dedicated adviser.',
+  'Votre patrimoine, suivi en toute transparence avec votre conseiller dédié.': 'Your assets, monitored with complete transparency by your dedicated advisor.',
   'Votre espace client Castelval': 'Your Castelval client area',
   'Démonstration : cliquez sur « Suivant ».': 'Demo: tap “Next”.',
   'Votre identifiant': 'Your user ID',
